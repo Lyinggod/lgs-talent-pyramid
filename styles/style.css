@@ -1,0 +1,193 @@
+/* Container: Uses CSS Grid for strict alignment */
+.talent-pyramid-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 Equal Columns */
+    gap: 10px;
+    padding: 10px;
+    background: url('systems/starwarsffg/images/ui/background-dark.jpg');
+    border: 1px solid #444;
+    margin-top: 10px;
+    align-items: start;
+}
+
+/* Column Headers */
+.grid-header {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #a83e3e;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+/* Common Card Styling */
+.talent-slot {
+    min-height: 172px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* An Active Talent Card */
+.talent-card {
+    background: #e6e6e6;
+    border: 1px solid #000;
+    padding: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+/* An Empty Slot (The "Spaces") */
+.talent-placeholder {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(77, 9, 9, 0.55);
+    font-size: 0.9em;
+}
+
+/* A Void (Where no slot exists, e.g., Row 1 Col 2) */
+.talent-void {
+    visibility: hidden; 
+}
+
+/* --- HEADER LAYOUT --- */
+
+.talent-header {
+    display: flex;
+    flex-direction: column; /* Stack the Name on top of the Meta row */
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+    gap: 2px;
+}
+
+.talent-name {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #111;
+    /* Ensure name takes full width of top row */
+    width: 100%; 
+    line-height: 1.2;
+}
+
+/* The second row containing Activation and Icons */
+.talent-meta {
+    display: flex;
+    flex-direction: row; /* Force side-by-side */
+    align-items: center; /* Vertically align text with icons */
+    justify-content: space-between; /* Activation Left, Icons Right */
+    width: 100%;
+    min-height: 20px; /* Ensure row has height even if empty */
+}
+
+/* Activation Abbreviation styling */
+.activation-abbrev {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #333;
+    background: rgba(0,0,0,0.05);
+    padding: 0 4px;
+    border-radius: 3px;
+    cursor: help;
+    white-space: nowrap; /* Prevent breaking */
+}
+
+/* Controls Container */
+.talent-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 8px; /* Space between icons */
+    margin-left: auto; /* Doubles down on pushing icons to the right */
+}
+
+/* Individual Icons */
+.talent-controls i {
+    cursor: pointer;
+    color: #444;
+    font-size: 1.0em; /* Ensure icons are visible size */
+}
+.talent-controls i:hover { color: #a00; }
+
+/* Ranked Text Color */
+.talent-name.is-ranked {
+    color: mediumblue;
+}
+
+/* Chat icon specific hover */
+.item-chat:hover i {
+    color: #007bff; 
+}
+
+/* Visual feedback for delete */
+.item-delete {
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+.item-delete:hover { opacity: 1; }
+
+.talent-description {
+    height: 100px;
+    overflow-y: auto;
+    font-size: 0.8em;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+.talent-description::-webkit-scrollbar { width: 5px; }
+.talent-description::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
+
+/* Popup System */
+#talent-pyramid-popup {
+    position: fixed;
+    z-index: 10000;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: 2px solid #a83e3e;
+    border-radius: 8px;
+    padding: 1em; 
+    width: auto;
+    max-width: 400px; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    pointer-events: none;
+    display: none;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.popup-header {
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.2em;
+    margin-bottom: 0.2em;
+    font-size: 1.2em;
+}
+
+.popup-stats {
+    font-style: italic;
+    color: #aaa;
+    font-size: 0.9em; 
+}
+
+.popup-desc {
+    line-height: 1.4;
+    white-space: pre-wrap;
+    font-size: 1em; 
+}
+
+/* Corner Positioning */
+.popup-UL { top: 20px; left: 20px; }
+.popup-UR { top: 20px; right: 20px; }
+.popup-LL { bottom: 20px; left: 20px; }
+.popup-LR { bottom: 20px; right: 20px; }
+
+/* XP Log Formatting */
+.talentRefund, font[color="talentRefund"] {
+    color: black !important;
+}
+
+/* Underline for Talents with Long Descriptions */
+.talent-name.has-long-desc {
+    text-decoration: underline;
+	text-decoration-color: red;
+}

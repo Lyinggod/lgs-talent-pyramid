@@ -1,0 +1,60 @@
+<div class="talent-pyramid-grid">
+    <div class="grid-header">{{localize "LGS.UI.Tier"}} 1</div>
+    <div class="grid-header">{{localize "LGS.UI.Tier"}} 2</div>
+    <div class="grid-header">{{localize "LGS.UI.Tier"}} 3</div>
+    <div class="grid-header">{{localize "LGS.UI.Tier"}} 4</div>
+    <div class="grid-header">{{localize "LGS.UI.Tier"}} 5</div>
+
+    {{#each rows as |row|}}
+        {{#each row.cells as |cell|}}
+            {{#if (eq cell.type "item")}}
+                <div class="talent-slot talent-card" 
+                     data-item-id="{{cell.itemId}}" 
+                     data-name="{{cell.name}}"
+                     data-tier="{{cell.tier}}"
+                     data-rank="{{cell.rank}}"
+                     data-activation="{{cell.activation}}">
+                    
+                    <div class="talent-header">
+                        {{!-- Row 1: Name 
+                              Added logic: has-long-desc class and tooltip if hasBoth is true
+                        --}}
+                        <div class="talent-name {{#if cell.isRanked}}is-ranked{{/if}} {{#if cell.hasBoth}}has-long-desc{{/if}}"
+                             {{#if cell.hasBoth}}title="{{localize 'LGS.UI.LongDescTooltip'}}"{{/if}}>
+                            {{cell.name}}
+                        </div>
+                        
+                        {{!-- Row 2: Activation (Left) | Controls (Right) --}}
+                        <div class="talent-meta">
+                            {{#if cell.activationAbbrev}}
+                                <span class="activation-abbrev" title="{{cell.activation}}">{{cell.activationAbbrev}}</span>
+                            {{else}}
+                                <span></span> 
+                            {{/if}}
+                            
+                            <div class="talent-controls">
+                                <a class="item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                                
+                                {{#if cell.canDelete}}
+                                <a class="item-delete" title="{{localize 'LGS.Notifications.CtrlDelete'}}"><i class="fas fa-trash"></i></a>
+                                {{/if}}
+
+                                <a class="item-chat" title="Send to Chat"><i class="fas fa-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{!-- Hidden container for the Popup text (Long Desc or Short Desc fallback) --}}
+                    <div class="popup-desc-source" style="display:none;">{{{cell.popupDescription}}}</div>
+                    
+                    {{!-- Visible container for Card text (Short Desc or Long Desc fallback) --}}
+                    <div class="talent-description">{{{cell.cardDescription}}}</div>
+                </div>
+            {{else if (eq cell.type "placeholder")}}
+                <div class="talent-slot talent-placeholder">{{localize "LGS.UI.Empty"}} {{cell.tier}}</div>
+            {{else}}
+                <div class="talent-slot talent-void"></div>
+            {{/if}}
+        {{/each}}
+    {{/each}}
+</div>

@@ -1,0 +1,26 @@
+{
+  "id": "lgs-talent-pyramid",
+  "title": "Lyinggods Talent Pyramid + Ability Costs",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "starwarsffg",
+        "type": "system"
+      }
+    ]
+  },
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/style.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

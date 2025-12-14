@@ -1,0 +1,73 @@
+{
+  "LGS": {
+    "Settings": {
+      "HideStock": {
+        "Name": "Hide Stock Talent List",
+        "Hint": "If checked, hides the default list view of talents on the character sheet."
+      },
+      "Enforce": {
+        "Name": "Enforce Tier Purchase Order",
+        "Hint": "Only allow purchase of talents if supporting lower tier talents exist (Pyramid Rule)."
+      },
+      "ModifyXP": {
+        "Name": "Modify XP",
+        "Hint": "Modify XP when talents are added or removed (Cost: Tier * 5)."
+      },
+      "PreventDebt": {
+        "Name": "Prevent XP Debt",
+        "Hint": "Prevent talent purchase if insufficient XP available."
+      },
+      "HoverEnabled": {
+        "Name": "Hover for Talent Description",
+        "Hint": "Shows the talent details in a popup window."
+      },
+      "HoverDelay": {
+        "Name": "Hover to talent popup delay",
+        "Hint": "Number of seconds to wait before showing showing popup."
+      },
+      "HoverPos": {
+        "Name": "Hover Popup Position",
+        "UL": "Upper Left",
+        "UR": "Upper Right",
+        "LL": "Lower Left",
+        "LR": "Lower Right"
+      },
+      "TextScale": {
+        "Name": "Scale Popup Text",
+        "Hint": "Adjust size of text in talent popup."
+      },
+      "WidthAdd": {
+        "Name": "Talent Popup Width",
+        "Hint": "Increases the width of the popup window."
+      }
+    },
+    "Dialog": {
+      "XPCostTitle": "XP Cost",
+      "DeleteTitle": "Delete Talent",
+      "DeleteContent": "<p>Are you sure you want to delete <b>{name}</b>?</p>",
+      "Delete": "Delete",
+      "Cancel": "Cancel",
+      "Save": "Save"
+    },
+    "Notifications": {
+      "CtrlDelete": "Hold CTRL and click to delete this talent.",
+      "MaxTier": "Cannot purchase talent beyond Tier 5.",
+      "InsufficientXP": "<b>Insufficient XP!</b><br/>Cost: {cost}<br/>Available: {available}",
+      "MissingReq": "<b>Cannot purchase Tier {tier} Talent!</b><br/>Missing requirements:<br/>- {errors}",
+      "RefundInfo": "Refunded {cost} XP for deleting {name}.",
+      "PurchaseInfo": "Spent {cost} XP to purchase {name} (Tier {tier}).",
+      "AbilityPurchase": "Spent {cost} XP to purchase {name}.",
+      "AbilityRefund": "Refunded {cost} XP for deleting {name}."
+    },
+    "Chat": {
+      "Purchased": "<b>{actor}</b> has purchased <b>{item}</b>."
+    },
+    "UI": {
+      "Tier": "Tier",
+      "Rank": "Rank",
+      "Activation": "Activation",
+      "Empty": "Empty Tier",
+      "LongDescTooltip": "Long Description in Popup"
+    }
+  }
+}
