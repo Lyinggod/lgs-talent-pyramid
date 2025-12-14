@@ -70,7 +70,7 @@ Add the Genesys talent pyramid to actor sheets. Optional XP tracking and tier en
 1.  Open the Foundry VTT Setup screen.
 2.  Go to **Add-on Modules**.
 3.  Click **Install Module**.
-4.  Paste the Manifest URL: `[Link to your module.json]`
+4.  Paste the Manifest URL: `https://github.com/Lyinggod/lgs-talent-pyramid/releases/download/v1.0.0/module.json`
 5.  Click **Install**.
 
 ## Compatibility
