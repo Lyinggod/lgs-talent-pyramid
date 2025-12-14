@@ -77,7 +77,7 @@ Hooks.on("renderActorSheet", async (app, html, data) => {
     const observer = new ResizeObserver(entries => {
         for (let entry of entries) {
             const nameEl = entry.target;
-            const desc = $(nameEl).parent().nextAll(".talent-description"); // Use nextAll because of hidden div
+            const desc = $(nameEl).parent().nextAll(".talent-description"); 
 
             const style = window.getComputedStyle(nameEl);
             const lineHeight = parseFloat(style.lineHeight);
@@ -86,11 +86,11 @@ Hooks.on("renderActorSheet", async (app, html, data) => {
             if (lineHeight > 0 && height > 0) {
                 const lines = Math.round(height / lineHeight);
                 if (lines === 2) {
-                    desc.css("height", "100px");
+                    desc.css("height", "113px");
                 } else if (lines >= 3) {
                     desc.css("height", "86px");
                 } else {
-                    desc.css("height", "113px");
+                    desc.css("height", "100px");
                 }
             }
         }
@@ -112,7 +112,6 @@ Hooks.on("renderActorSheet", async (app, html, data) => {
         const tier = card.data("tier");
         const rank = card.data("rank");
         const activation = card.data("activation") || "None";
-        // Grab content from the hidden popup source
         const desc = card.find(".popup-desc-source").html();
 
         const content = `
@@ -183,7 +182,6 @@ Hooks.on("renderActorSheet", async (app, html, data) => {
             tier: card.data("tier"),
             rank: card.data("rank"),
             activation: card.data("activation"),
-            // Grab content from the hidden popup source
             desc: card.find(".popup-desc-source").html()
         };
         const delay = game.settings.get(MODULE_ID, "HoverDelay") * 1000;
@@ -241,6 +239,7 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
     const checkDebt = game.settings.get(MODULE_ID, "PreventXPDebt");
     const availXP = actor.system.experience.available;
 
+    // Ability Logic
     if (item.type === "ability") {
         if (!checkDebt) return true;
         const xpCost = item.getFlag(MODULE_ID, "xpCost") || 0;
@@ -251,14 +250,37 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
         return true;
     }
 
+    // Talent Logic
     if (item.type === "talent") {
+        
+        // --- 1. Check for Unranked Duplicates ---
+        const val = item.system.ranked;
+        const isRanked = (val === true || val === "Yes" || val === "true");
+
+        if (!isRanked) {
+            const sourceId = item.flags?.core?.sourceId;
+            const existing = actor.items.find(i => {
+                if (i.type !== "talent") return false;
+                // If both items come from a compendium, check sourceId
+                if (sourceId && i.flags?.core?.sourceId && i.flags.core.sourceId === sourceId) return true;
+                // Fallback to name check
+                return i.name === item.name;
+            });
+
+            if (existing) {
+                ui.notifications.warn(game.i18n.format("LGS.Notifications.UnrankedDuplicate", { name: item.name }));
+                return false;
+            }
+        }
+
         if (!checkPyramid && !checkDebt) return true;
 
-        const existing = actor.items.filter(i => i.type === "talent");
+        // --- 2. Calculate Tier and Cost ---
+        const existingItems = actor.items.filter(i => i.type === "talent");
         const sourceId = item.flags?.core?.sourceId || null;
         const rankIndex = sourceId 
-            ? existing.filter(i => i.flags?.core?.sourceId === sourceId).length
-            : existing.filter(i => i.name === item.name).length;
+            ? existingItems.filter(i => i.flags?.core?.sourceId === sourceId).length
+            : existingItems.filter(i => i.name === item.name).length;
 
         const baseTier = Number(item.system.tier) || 1;
         const targetTier = baseTier + rankIndex;
@@ -268,16 +290,18 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
             return false;
         }
 
+        // --- 3. XP Debt Check ---
         const cost = targetTier * 5;
         if (checkDebt && availXP < cost) {
             ui.notifications.error(game.i18n.format("LGS.Notifications.InsufficientXP", { cost, available: availXP }));
             return false;
         }
 
+        // --- 4. Pyramid Rules Check ---
         if (checkPyramid && targetTier > 1) {
             const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
             const grouped = {};
-            existing.sort((a,b) => a.id.localeCompare(b.id)).forEach(i => {
+            existingItems.sort((a,b) => a.id.localeCompare(b.id)).forEach(i => {
                 const k = i.flags?.core?.sourceId || i.name;
                 if (!grouped[k]) grouped[k] = [];
                 grouped[k].push(i);

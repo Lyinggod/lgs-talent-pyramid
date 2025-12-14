@@ -57,7 +57,8 @@
       "RefundInfo": "Refunded {cost} XP for deleting {name}.",
       "PurchaseInfo": "Spent {cost} XP to purchase {name} (Tier {tier}).",
       "AbilityPurchase": "Spent {cost} XP to purchase {name}.",
-      "AbilityRefund": "Refunded {cost} XP for deleting {name}."
+      "AbilityRefund": "Refunded {cost} XP for deleting {name}.",
+      "UnrankedDuplicate": "The talent '{name}' is not ranked and cannot be purchased multiple times."
     },
     "Chat": {
       "Purchased": "<b>{actor}</b> has purchased <b>{item}</b>."
