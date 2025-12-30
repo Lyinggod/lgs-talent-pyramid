@@ -12,7 +12,7 @@ Add the Genesys talent pyramid to actor sheets. Optional XP tracking and tier en
 *   **Automated XP Spending:** A GM setting option that automatically deducts XP upon purchase and refunds when deleted, updating the XP log.
 
 ### 2. Ability XP Costs
-*   **Custom Costs:** GMs can assign XP costs to **Ability** items which treated in the same way as talent XP spends.
+*   **Custom Costs:** GMs can assign XP costs to **Ability** items which treated in the same way as talent XP spends via the $ in the dialog header.
 
 ### 3. Rich UI Enhancements
 *   **Hover Popups:** Hovering over a talent displays a customizable popup with Name, Tier, Rank, Activation, and Description. This is player configurable for location, font size, and popup width.
