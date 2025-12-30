@@ -79,3 +79,7 @@ Add the Genesys talent pyramid to actor sheets. Optional XP tracking and tier en
 
 ## License
 This project is licensed under the MIT License.
+
+## To Do
+- Only show icon images to players if a PC has an assigned bonus.
+- Player option: When too many icons, either they wrap (higher bonus bar), compress to overlaping symbols, or show bonuses on hover w/ indicator that there are bonuses (maybe show boost w/ symbol for more bonuses that appear on hover).
